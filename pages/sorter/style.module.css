@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.diagram {
+  display: flex;
+}
+
+.bar {
+  width: 25px;
+  height: 100px;
+}
+
+.settings {
+  width: 400px;
+  min-width: 400px;
+  height: calc(100vh - 80px);
+  background-color: var(--bg0);
+  padding: 60px 40px;
+  border: var(--border) solid 1px;
+}
+
+.settings > * {
+  margin-bottom: 10px;
+}

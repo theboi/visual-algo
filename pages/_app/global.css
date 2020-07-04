@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* /////////////////////////////////////////////////////////////////////////////
+Variables
+//////////////////////////////////////////////////////////////////////////////*/
+:root {
+	--black: #100007;
+	--darkblue: #1D3557;
+	--blue: #226CE0;
+	--green: #21B852;
+	--red: #E94545;
+	--pink: #FF5D73;
+	--lightblue: #DBE9EE;
+	--white: #FFFFFF;
+	--grey: #d7d7d7;
+
+	--bg0: rgb(255, 255, 255);
+	--bg1: rgb(250, 250, 250);
+
+	--border: rgba(16, 0, 7, 0.1);
+}
+
+/* /////////////////////////////////////////////////////////////////////////////
+Reset
+//////////////////////////////////////////////////////////////////////////////*/
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+*:not(input):focus-visible {
+  outline: solid 3px rgba(0, 0, 0, 0.2) !important;
+  z-index: 100;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, figure, figcaption, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	clear: both;
+}
+
+ul {
+	list-style: none;
+}
+
+blockquote {
+	quotes: none;
+}
+blockquote::before, blockquote::after {
+	content: none;
+}
+del {
+	text-decoration: line-through;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a img { border: none; }
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+a {
+	font-style: none;
+}
+
+*:focus {
+	outline: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+}
+
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+-webkit-appearance: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+/* /////////////////////////////////////////////////////////////////////////////
+Defaults
+//////////////////////////////////////////////////////////////////////////////*/
+
+/* /////////////////////////////////////////////////////////////////////////////
+MOBILE
+//////////////////////////////////////////////////////////////////////////////*/
+
+
+/* /////////////////////////////////////////////////////////////////////////////
+DESKTOP
+//////////////////////////////////////////////////////////////////////////////*/
+
+@media screen and (min-width: 768px)  {
+
+}

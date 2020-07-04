@@ -1,4 +1,4 @@
 # visual-algo
 
 ## About
-Algorithm Visualiser in TypeScript (Superset of JavaScript).
+Algorithm Visualiser made with React and TypeScript (Superset of JavaScript).

@@ -1,0 +1,26 @@
+.main {
+  height: 100vh;
+  background-color: var(--bg1);
+}
+
+.navbar {
+  display: flex;
+  padding: 0 20px;
+  background-color: var(--darkblue);
+  width: 100vw;
+  line-height: 80px;
+}
+
+.navbar > * {
+  color: var(--white);
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+.navbar > *:hover {
+  color: var(--grey);
+}
+
+.brand {
+  font-weight: 600;
+}

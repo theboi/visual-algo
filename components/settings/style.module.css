@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  place-items: center;
+}
+
+.main > *:not(:last-child){
+  margin-right: 15px;
+}
+
+.label {
+  width: 70px;
+  min-width: 70px;
+}
