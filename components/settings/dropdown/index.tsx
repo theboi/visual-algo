@@ -17,7 +17,7 @@ export default (props: {
         </label>
         <div id="dropdown">
           <button
-            className="btn btn-primary dropdown-toggle"
+            className="btn btn-outline-primary dropdown-toggle"
             type="button"
             id="dropdown"
             data-toggle="dropdown"

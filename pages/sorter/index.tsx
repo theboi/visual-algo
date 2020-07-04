@@ -13,6 +13,7 @@ const count = 20;
 export default class extends React.Component {
   state = {
     random: [],
+    isSorting: false,
   };
 
   constructor(props) {
@@ -66,25 +67,39 @@ export default class extends React.Component {
               options={["Bubble Sort", "Quick Sort", "Merge Sort"]}
               onChange={(value) => {}}
             />
+            <div className={style.control}>
+              <button
+                type="button"
+                className={`btn btn-${
+                  this.state.isSorting ? "danger" : "primary"
+                }`}
+                onClick={() => {
+                  if (this.state.isSorting) {
+                    // TODO: ADD SORT STOP
+                  } else {
+                    bubbleSort(this.state.random, this.updateState);
+                  }
+                  this.setState({ isSorting: !this.state.isSorting });
+                }}
+              >
+                {this.state.isSorting ? "Pause" : "Start"}
+              </button>
+              <button
+                type="button"
+                className="btn btn-light"
+                disabled={this.state.isSorting ? true : false}
+                onClick={() =>
+                  this.setState({
+                    random: [...Array(count)].map(() => {
+                      return Math.ceil(Math.random() * (max - min) + min);
+                    }),
+                  })
+                }
+              >
+                New
+              </button>
+            </div>
           </div>
-          {/* <button
-            className="btn btn-primary btn-block"
-            onClick={() => bubbleSort(this.state.random, this.updateState)}
-          >
-            Sort
-          </button>
-          <button
-            className="btn btn-light btn-block"
-            onClick={() =>
-              this.setState({
-                random: [...Array(count)].map(() => {
-                  return Math.ceil(Math.random() * (max - min) + min);
-                }),
-              })
-            }
-          >
-            Reset
-          </button> */}
         </div>
       </>
     );

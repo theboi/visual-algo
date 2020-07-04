@@ -19,8 +19,20 @@
   background-color: var(--bg0);
   padding: 60px 40px;
   border: var(--border) solid 1px;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings > * {
   margin-bottom: 10px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.control > * {
+  margin-bottom: 5px;
 }
