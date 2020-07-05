@@ -6,6 +6,7 @@ export default (props: {
   title: string;
   options: string[];
   onChange: (value) => void;
+  disabled?: boolean;
 }) => {
   const [selected, setSelected] = useState(0);
 
@@ -17,12 +18,13 @@ export default (props: {
         </label>
         <div id="dropdown">
           <button
-            className="btn btn-outline-primary dropdown-toggle"
+            className={`btn dropdown-toggle btn-${props.disabled ?? false ? "secondary" : "outline-primary"}`}
             type="button"
             id="dropdown"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
+            disabled={props.disabled ?? false}
           >
             {props.options[selected]}
           </button>

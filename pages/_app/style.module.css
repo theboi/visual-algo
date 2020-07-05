@@ -5,7 +5,7 @@
 
 .navbar {
   display: flex;
-  padding: 0 20px;
+  padding: 0 35px;
   background-color: var(--darkblue);
   width: 100vw;
   line-height: 80px;
@@ -14,7 +14,7 @@
 .navbar > * {
   color: var(--white);
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 5px;
 }
 
 .navbar > *:hover {
@@ -23,4 +23,8 @@
 
 .brand {
   font-weight: 600;
+}
+
+.divider {
+  
 }

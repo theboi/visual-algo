@@ -5,11 +5,26 @@
 
 .diagram {
   display: flex;
+  margin: 0 30px;
+  width: 100%;
 }
 
 .bar {
-  width: 25px;
+  position: relative;
+  width: 1px;
+  flex-grow: 1;
+  margin: 0 1px;
   height: 100px;
+}
+
+.barLabel {
+  bottom: -25px;
+  left: -15px;
+  right: -15px;
+  position: absolute;
+  color: var(--black);
+  font-weight: 700;
+  text-align: center;
 }
 
 .settings {

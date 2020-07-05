@@ -7,36 +7,33 @@ import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
 
 const min = 1;
-const max = 200;
+const max = 500;
+let random = [...Array(200)].map(() => {
+  return {
+    value: Math.ceil(Math.random() * (max - min) + min),
+    status: 0,
+  };
+});
 
 export default class extends React.Component {
   state = {
-    random: [],
+    current: [],
     isSorting: false,
-    options: {
-      speed: 50,
-      count: 20,
-      algorithm: 0,
-      color: 0,
-    }
+
+    speed: 75,
+    count: 20,
+    algorithm: 0,
+    color: 0,
   };
 
   constructor(props) {
     super(props);
-    this.updateState = this.updateState.bind(this);
+    this.setState = this.setState.bind(this);
   }
 
   componentDidMount() {
     this.setState({
-      random: [...Array(this.state.options.count)].map(() => {
-        return Math.ceil(Math.random() * (max - min) + min);
-      }),
-    });
-  }
-
-  updateState(update: number[]) {
-    this.setState({
-      random: update,
+      current: random.slice(0, this.state.count),
     });
   }
 
@@ -45,37 +42,69 @@ export default class extends React.Component {
       <>
         <div className={style.main}>
           <div className={style.diagram}>
-            {this.state?.random.map((value, index) => {
+            {this.state?.current.map((value, index) => {
+              const status = value.status
+                ? {
+                    backgroundColor: [null, "#ffc107", "#28a745"][value.status],
+                  }
+                : null;
               return (
                 <div
                   className={style.bar}
                   key={index}
                   style={{
-                    height: value,
-                    backgroundColor: `rgb(${
-                      255 * ((value - min) / (max - min))
-                    }, ${255 - 255 * ((value - min) / (max - min))}, ${
-                      255 - (255 * ((value - min) / (max - min))) / 2
-                    })`,
+                    height: value.value,
+                    backgroundColor: [
+                      "#007bff",
+                      `rgb(${255 * ((value.value - min) / (max - min))}, ${
+                        255 - 255 * ((value.value - min) / (max - min))
+                      }, ${
+                        255 - (255 * ((value.value - min) / (max - min))) / 2
+                      })`,
+                    ][this.state.color],
+                    ...status,
                   }}
                 >
-                  {value}
+                  {this.state.count < 70 ? (
+                    <p className={style.barLabel}>{value.value}</p>
+                  ) : null}
                 </div>
               );
             })}
           </div>
           <div className={style.settings}>
-            <Slider title="Speed" value={this.state.options.speed} min={1} max={500} onChange={(value) => this.setState({options: {speed: value}})} />
-            <Slider title="Count" value={this.state.options.count} min={4} max={200} onChange={(value) => this.setState({options: {count: value}})} />
+            <Slider
+              title="Speed"
+              value={this.state.speed}
+              min={1}
+              max={100}
+              onChange={(value) => this.setState({ speed: value })}
+              disabled={this.state.isSorting}
+            />
+            <Slider
+              title="Count"
+              value={this.state.count}
+              min={4}
+              max={100}
+              onChange={(value) =>
+                this.setState({
+                  count: value,
+                  current: random.slice(0, value),
+                })
+              }
+              disabled={this.state.isSorting}
+            />
             <Dropdown
               title="Algorithm"
-              options={["Bubble Sort", "Quick Sort", "Merge Sort"]}
-              onChange={(value) => {}}
+              options={["Bubble Sort"]} //, "Quick Sort", "Merge Sort"
+              onChange={(value) => this.setState({ algo: value })}
+              disabled={this.state.isSorting}
             />
             <Dropdown
               title="Color"
-              options={["Matching", "Gradient"]}
-              onChange={(value) => {}}
+              options={["Default", "Gradient"]}
+              onChange={(value) => this.setState({ color: value })}
+              disabled={this.state.isSorting}
             />
             <div className={style.control}>
               <button
@@ -85,26 +114,34 @@ export default class extends React.Component {
                 }`}
                 onClick={() => {
                   if (this.state.isSorting) {
-                    // TODO: ADD SORT STOP && ON FINISH UPDATE BTNS
+                    // TODO: ADD SORT STOP
                   } else {
-                    bubbleSort(this.state.random, this.updateState);
+                    bubbleSort(
+                      this.state.current,
+                      100 - this.state.speed,
+                      this.setState,
+                    );
                   }
                   this.setState({ isSorting: !this.state.isSorting });
                 }}
               >
-                {this.state.isSorting ? "Pause" : "Start"}
+                {this.state.isSorting ? "Stop" : "Start"}
               </button>
               <button
                 type="button"
                 className="btn btn-light"
-                disabled={this.state.isSorting ? true : false}
-                onClick={() =>
+                disabled={this.state.isSorting}
+                onClick={() => {
+                  random = [...Array(200)].map(() => {
+                    return {
+                      value: Math.ceil(Math.random() * (max - min) + min),
+                      status: 0,
+                    };
+                  });
                   this.setState({
-                    random: [...Array(this.state.options.count)].map(() => {
-                      return Math.ceil(Math.random() * (max - min) + min);
-                    }),
-                  })
-                }
+                    current: random.slice(0, this.state.count),
+                  });
+                }}
               >
                 New
               </button>

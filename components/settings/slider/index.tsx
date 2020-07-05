@@ -8,6 +8,7 @@ export default (props: {
   onChange: (value) => void;
   min: number;
   max: number;
+  disabled?: boolean
 }) => {
   const [value, setValue] = useState(props.value);
 
@@ -41,6 +42,7 @@ export default (props: {
           value={value}
           min={props.min}
           max={props.max}
+          disabled={props.disabled ?? false}
           {...onChange}
         />
         <input
@@ -48,6 +50,7 @@ export default (props: {
           className="form-control col-2 pr-1"
           id="slider"
           value={value}
+          disabled={props.disabled ?? false}
           {...onChange}
         />
       </div>

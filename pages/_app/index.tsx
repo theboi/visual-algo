@@ -35,7 +35,11 @@ export default ({ Component, pageProps }: AppProps) => {
       <div className={style.main}>
         <nav className={style.navbar}>
           <Link href="/sorter">
-            <a className={style.brand}>Algorithm Visualiser | Sorter</a>
+            <a className={style.brand}>Algorithm Visualiser</a>
+          </Link>
+          <p>|</p>
+          <Link href="/">
+            <a className={style.brand}>Sorter</a>
           </Link>
         </nav>
         <Component {...pageProps} />
