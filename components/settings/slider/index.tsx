@@ -6,8 +6,27 @@ export default (props: {
   title: string;
   value: number;
   onChange: (value) => void;
+  min: number;
+  max: number;
 }) => {
   const [value, setValue] = useState(props.value);
+
+  const onChange = {
+    onChange: (event) => {
+      setValue(event.target.valueAsNumber);
+      props.onChange(event.target.valueAsNumber);
+    },
+    onBlur: (event) => {
+      let validated = Math.round(event.target.valueAsNumber)
+      if (validated > props.max) {
+        validated = props.max;
+      } else if (validated < props.min) {
+        validated = props.min;
+      }
+      setValue(validated);
+      props.onChange(validated);
+    },
+  }
 
   return (
     <>
@@ -20,20 +39,16 @@ export default (props: {
           className="custom-range"
           id="slider"
           value={value}
-          onChange={(event) => {
-            setValue(event.target.valueAsNumber)
-            props.onChange(event.target.valueAsNumber);
-          }}
+          min={props.min}
+          max={props.max}
+          {...onChange}
         />
         <input
           type="number"
-          className="form-control col-2"
+          className="form-control col-2 pr-1"
           id="slider"
           value={value}
-          onChange={event => {
-            setValue(event.target.valueAsNumber)
-            props.onChange(event.target.valueAsNumber);
-          }}
+          {...onChange}
         />
       </div>
     </>

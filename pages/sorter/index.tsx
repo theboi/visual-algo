@@ -8,12 +8,17 @@ import Dropdown from "../../components/settings/dropdown";
 
 const min = 1;
 const max = 200;
-const count = 20;
 
 export default class extends React.Component {
   state = {
     random: [],
     isSorting: false,
+    options: {
+      speed: 50,
+      count: 20,
+      algorithm: 0,
+      color: 0,
+    }
   };
 
   constructor(props) {
@@ -23,7 +28,7 @@ export default class extends React.Component {
 
   componentDidMount() {
     this.setState({
-      random: [...Array(count)].map(() => {
+      random: [...Array(this.state.options.count)].map(() => {
         return Math.ceil(Math.random() * (max - min) + min);
       }),
     });
@@ -60,11 +65,16 @@ export default class extends React.Component {
             })}
           </div>
           <div className={style.settings}>
-            <Slider title="Speed" value={50} onChange={(value) => {}} />
-            <Slider title="Count" value={50} onChange={(value) => {}} />
+            <Slider title="Speed" value={this.state.options.speed} min={1} max={500} onChange={(value) => this.setState({options: {speed: value}})} />
+            <Slider title="Count" value={this.state.options.count} min={4} max={200} onChange={(value) => this.setState({options: {count: value}})} />
             <Dropdown
               title="Algorithm"
               options={["Bubble Sort", "Quick Sort", "Merge Sort"]}
+              onChange={(value) => {}}
+            />
+            <Dropdown
+              title="Color"
+              options={["Matching", "Gradient"]}
               onChange={(value) => {}}
             />
             <div className={style.control}>
@@ -75,7 +85,7 @@ export default class extends React.Component {
                 }`}
                 onClick={() => {
                   if (this.state.isSorting) {
-                    // TODO: ADD SORT STOP
+                    // TODO: ADD SORT STOP && ON FINISH UPDATE BTNS
                   } else {
                     bubbleSort(this.state.random, this.updateState);
                   }
@@ -90,7 +100,7 @@ export default class extends React.Component {
                 disabled={this.state.isSorting ? true : false}
                 onClick={() =>
                   this.setState({
-                    random: [...Array(count)].map(() => {
+                    random: [...Array(this.state.options.count)].map(() => {
                       return Math.ceil(Math.random() * (max - min) + min);
                     }),
                   })
