@@ -12,6 +12,7 @@ const completeAnimation = (
     });
     setState({current: output});
   }, 700);
+
 };
 
 
@@ -46,10 +47,10 @@ export function bubbleSort(
         }
       }
     }
-    
+
     completeAnimation(output, setState);
     setState({isSorting: false})
-
+    
     return output;
   })();
 }

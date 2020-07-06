@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import style from './style.module.css';
 

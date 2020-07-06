@@ -96,7 +96,7 @@ export default class extends React.Component {
             />
             <Dropdown
               title="Algorithm"
-              options={["Bubble Sort"]} //, "Quick Sort", "Merge Sort"
+              options={["Bubble Sort", "Quick Sort", "Merge Sort"]} 
               onChange={(value) => this.setState({ algo: value })}
               disabled={this.state.isSorting}
             />
