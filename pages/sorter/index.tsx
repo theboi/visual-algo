@@ -96,7 +96,7 @@ export default class extends React.Component {
             />
             <Dropdown
               title="Algorithm"
-              options={["Bubble Sort", "Quick Sort", "Merge Sort"]} 
+              options={["Bubble", "Quicksort", "Merge", "Insertion", "Timsort"]} 
               onChange={(value) => this.setState({ algo: value })}
               disabled={this.state.isSorting}
             />
@@ -125,7 +125,7 @@ export default class extends React.Component {
                   this.setState({ isSorting: !this.state.isSorting });
                 }}
               >
-                {this.state.isSorting ? "Stop" : "Start"}
+                {this.state.isSorting ? "Stop" : "Start Sorting"}
               </button>
               <button
                 type="button"
@@ -143,7 +143,7 @@ export default class extends React.Component {
                   });
                 }}
               >
-                New
+                Randomise List
               </button>
             </div>
           </div>
