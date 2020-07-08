@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 
-import { bubbleSort } from "../../algo/sorter";
+import { bubbleSort } from "../../algo/sorter/bubbleSort";
+import { quickSort } from "../../algo/sorter/quickSort";
 
 import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
@@ -96,8 +97,15 @@ export default class extends React.Component {
             />
             <Dropdown
               title="Algorithm"
-              options={["Bubble", "Quicksort", "Merge", "Insertion", "Timsort"]} 
-              onChange={(value) => this.setState({ algo: value })}
+              options={[
+                "Bubble",
+                "Quicksort",
+                "Merge",
+                "Heap",
+                "Insertion",
+                "Timsort",
+              ]}
+              onChange={(value) => this.setState({ algorithm: value })}
               disabled={this.state.isSorting}
             />
             <Dropdown
@@ -116,16 +124,18 @@ export default class extends React.Component {
                   if (this.state.isSorting) {
                     // TODO: ADD SORT STOP
                   } else {
-                    bubbleSort(
-                      this.state.current,
-                      100 - this.state.speed,
-                      this.setState,
-                    );
+                    (async () => {
+                      [bubbleSort, quickSort][this.state.algorithm](
+                        this.state.current,
+                        100 - this.state.speed,
+                        this.setState
+                      );
+                    })()
                   }
                   this.setState({ isSorting: !this.state.isSorting });
                 }}
               >
-                {this.state.isSorting ? "Stop" : "Start Sorting"}
+                {this.state.isSorting ? "Stop Sorting" : "Start Sorting"}
               </button>
               <button
                 type="button"
