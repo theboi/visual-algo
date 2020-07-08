@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 
+import { delay, completeAnimation } from "../../algo/sorter/utility";
 import { bubbleSort } from "../../algo/sorter/bubbleSort";
 import { quickSort } from "../../algo/sorter/quickSort";
 
@@ -125,12 +126,17 @@ export default class extends React.Component {
                     // TODO: ADD SORT STOP
                   } else {
                     (async () => {
-                      [bubbleSort, quickSort][this.state.algorithm](
+                      const result = await [bubbleSort, quickSort][this.state.algorithm](
                         this.state.current,
                         100 - this.state.speed,
                         this.setState
                       );
-                    })()
+
+                      delay(100, () => {
+                        completeAnimation(result, this.setState);
+                        this.setState({ isSorting: false });
+                      });
+                    })();
                   }
                   this.setState({ isSorting: !this.state.isSorting });
                 }}

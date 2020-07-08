@@ -1,6 +1,6 @@
 import { delay, completeAnimation, swap } from "./utility";
 
-export function quickSort(
+export async function quickSort(
   input: {
     value: number;
     status: number;
@@ -10,20 +10,15 @@ export function quickSort(
   high: number = input.length - 1,
   low: number = 0
 ) {
-  (async () => {
-    console.log("Input: ", input);
-    if (low >= high) {
-      await delay(100, () => {
-        completeAnimation(input, setState);
-        setState({ isSorting: false });
-      });
-      return input;
-    }
-    const pivot = input[Math.floor((high + low) / 2)]?.value;
-    const pi = await partition(input, low, high, pivot, speed, setState);
-    quickSort(input, speed, setState, pi - 1, low);
-    quickSort(input, speed, setState, high, pi);
-  })();
+  if (low >= high) {
+    return;
+  }
+  const pivot = input[Math.floor((high + low) / 2)]?.value;
+  const pi = await partition(input, low, high, pivot, speed, setState);
+  await quickSort(input, speed, setState, pi - 1, low);
+  await quickSort(input, speed, setState, high, pi);
+
+  return input;
 }
 
 const partition = async (
@@ -44,7 +39,6 @@ const partition = async (
     while (arr[high].value > pivot) {
       high--;
     }
-    console.log(pivot, low, high);
     if (low <= high) {
       swap(arr, low, high);
 

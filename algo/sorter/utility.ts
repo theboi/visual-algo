@@ -1,16 +1,16 @@
 export const completeAnimation = (
-  output: { value: number; status: number }[],
+  arr: { value: number; status: number }[],
   setState: (state) => void
 ) => {
-  output.forEach((value) => {
+  arr?.forEach((value) => {
     value.status = 2;
   });
-  setState({ current: output });
+  setState({ current: arr });
   setTimeout(() => {
-    output.forEach((value) => {
+    arr?.forEach((value) => {
       value.status = 0;
     });
-    setState({ current: output });
+    setState({ current: arr });
   }, 700);
 };
 
