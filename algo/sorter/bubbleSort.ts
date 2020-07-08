@@ -1,25 +1,21 @@
-import { delay, completeAnimation, swap } from "./utility";
+import { delay, swap } from "./utility";
 
 export async function bubbleSort(
-  input: {
+  arr: {
     value: number;
     status: number;
   }[],
   speed: number,
-  setState: (state) => void
+  setState: (state) => void,
+  counter: number = 0
 ) {
-  for (let i = 0; i < input.length; i++) {
-    for (let i = 0; i < input.length; i++) {
-      if (input[i]?.value > input[i + 1]?.value) {
-        swap(input, i, i + 1);
-
-        input[i + 1].status = 1;
-        input[i].status = 2;
-        await delay(speed, () => setState({ current: input }));
-        input[i + 1].status = 0;
-        input[i].status = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i]?.value > arr[i + 1]?.value) {
+        await swap(arr, i, i + 1, speed, setState);
+        counter++
       }
     }
   }
-  return input;
+  return [arr, counter];
 }

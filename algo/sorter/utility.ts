@@ -23,6 +23,20 @@ export const delay = (duration: number, callback: Function) => {
   });
 };
 
-export const swap = (arr, index1, index2) => {
-  [arr[index1], arr[index2]] = [arr[index2], arr[index1]]
-}
+export const swap = async (
+  arr: {
+    value: number;
+    status: number;
+  }[],
+  index1: number,
+  index2: number,
+  speed: number,
+  setState: (state) => void
+) => {
+  [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
+  arr[index1].status = 1;
+  arr[index2].status = 2;
+  await delay(speed, () => setState({ current: arr }));
+  arr[index1].status = 0;
+  arr[index2].status = 0;
+};

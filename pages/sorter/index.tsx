@@ -4,6 +4,7 @@ import style from "./style.module.css";
 import { delay, completeAnimation } from "../../algo/sorter/utility";
 import { bubbleSort } from "../../algo/sorter/bubbleSort";
 import { quickSort } from "../../algo/sorter/quickSort";
+import { mergeSort } from "../../algo/sorter/mergeSort";
 
 import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
@@ -26,6 +27,8 @@ export default class extends React.Component {
     count: 20,
     algorithm: 0,
     color: 0,
+
+    timer: 0,
   };
 
   constructor(props) {
@@ -40,6 +43,7 @@ export default class extends React.Component {
   }
 
   render() {
+    const algos = [bubbleSort, quickSort, mergeSort];
     return (
       <>
         <div className={style.main}>
@@ -99,12 +103,12 @@ export default class extends React.Component {
             <Dropdown
               title="Algorithm"
               options={[
-                "Bubble",
-                "Quicksort",
-                "Merge",
-                "Heap",
-                "Insertion",
-                "Timsort",
+                "Bubble Sort",
+                "Quick Sort",
+                "Merge Sort",
+                // "Heap Sort",
+                // "Insertion Sort",
+                // "Tim Sort",
               ]}
               onChange={(value) => this.setState({ algorithm: value })}
               disabled={this.state.isSorting}
@@ -126,14 +130,18 @@ export default class extends React.Component {
                     // TODO: ADD SORT STOP
                   } else {
                     (async () => {
-                      const result = await [bubbleSort, quickSort][this.state.algorithm](
+                      const [result, timer] = await algos[this.state.algorithm](
                         this.state.current,
-                        100 - this.state.speed,
+                        101 - this.state.speed,
                         this.setState
                       );
+                      this.setState({ timer: timer });
 
                       delay(100, () => {
-                        completeAnimation(result, this.setState);
+                        completeAnimation(
+                          result as { value: number; status: number }[],
+                          this.setState
+                        );
                         this.setState({ isSorting: false });
                       });
                     })();
@@ -156,11 +164,20 @@ export default class extends React.Component {
                   });
                   this.setState({
                     current: random.slice(0, this.state.count),
+                    timer: 0,
                   });
                 }}
               >
                 Randomise List
               </button>
+            </div>
+            <div>
+              {this.state.timer ? (
+                <p className={style.speed}>
+                  {this.state.timer} swap{this.state.timer === 1 ? null : "s"}{" "}
+                  (approx {this.state.timer * (101 - this.state.speed)} ms)
+                </p>
+              ) : null}
             </div>
           </div>
         </div>
