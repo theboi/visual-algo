@@ -9,6 +9,11 @@ export async function mergeSort(
   setState: (state) => void,
   counter: number = 0
 ) {
-  
+
+  console.log(arr)
   return [arr, counter];
+}
+
+const merge = async () => {
+  
 }

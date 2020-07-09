@@ -7,7 +7,7 @@ export async function bubbleSort(
   }[],
   speed: number,
   setState: (state) => void,
-  counter: number = 0
+  counter: number = 0,
 ) {
   for (let i = 0; i < arr.length; i++) {
     for (let i = 0; i < arr.length; i++) {

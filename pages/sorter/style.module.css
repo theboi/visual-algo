@@ -60,7 +60,16 @@ MOBILE
   margin-bottom: 20px 0;
   font-weight: 500;
   font-size: 13px;
-  color: var(--dark-grey);
+  color: var(--dark-gray);
+}
+
+.credits {
+  text-align: center;
+  margin-bottom: 20px 0;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: auto;
 }
 
 /* /////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 .navbar {
   display: flex;
   padding: 0 35px;
-  background-color: var(--darkblue);
+  background-color: var(--l-darkblue);
   width: 100vw;
   line-height: 80px;
 }
@@ -17,14 +17,15 @@
   padding: 0 5px;
 }
 
-.navbar > *:hover {
-  color: var(--grey);
+.navbar > p {
+  cursor: default;
+}
+
+.navbar > a:hover {
+  color: var(--white);
+  filter: brightness(90%);
 }
 
 .brand {
   font-weight: 600;
-}
-
-.divider {
-  
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import style from "./style.module.css";
 
 import { delay, completeAnimation } from "../../algo/sorter/utility";
@@ -28,7 +29,8 @@ export default class extends React.Component {
     algorithm: 0,
     color: 0,
 
-    timer: 0,
+    timer: -1,
+    test: [false]
   };
 
   constructor(props) {
@@ -46,6 +48,9 @@ export default class extends React.Component {
     const algos = [bubbleSort, quickSort, mergeSort];
     return (
       <>
+      <Head>
+        <link rel="icon" href="./icon-sorter.png"/>
+      </Head>
         <div className={style.main}>
           <div className={style.diagram}>
             {this.state?.current.map((value, index) => {
@@ -133,7 +138,7 @@ export default class extends React.Component {
                       const [result, timer] = await algos[this.state.algorithm](
                         this.state.current,
                         101 - this.state.speed,
-                        this.setState
+                        this.setState,
                       );
                       this.setState({ timer: timer });
 
@@ -164,7 +169,7 @@ export default class extends React.Component {
                   });
                   this.setState({
                     current: random.slice(0, this.state.count),
-                    timer: 0,
+                    timer: -1,
                   });
                 }}
               >
@@ -172,12 +177,16 @@ export default class extends React.Component {
               </button>
             </div>
             <div>
-              {this.state.timer ? (
+              {this.state.timer === -1 ? null : (
                 <p className={style.speed}>
                   {this.state.timer} swap{this.state.timer === 1 ? null : "s"}{" "}
                   (approx {this.state.timer * (101 - this.state.speed)} ms)
                 </p>
-              ) : null}
+              )}
+            </div>
+            <div className={style.credits}>
+            <p>Made with ❤️ by <a href="https://www.ryanthe.com" target="_blank">Ryan The</a>, 2020</p>
+            <p>Open sourced on <a href="https://github.com/theboi/visual-algo" target="_blank">GitHub</a>. </p>
             </div>
           </div>
         </div>
