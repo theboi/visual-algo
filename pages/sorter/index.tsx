@@ -40,14 +40,14 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      current: random.slice(0, this.state.count),
-    });
     if (!fetchedLocalStorage) {
-      this.setState(JSON.parse(window.localStorage.getItem("sorterSettings") ?? "{}"));
       fetchedLocalStorage = true;
-      console.log(JSON.parse(window.localStorage.getItem("sorterSettings") ?? "{}"))
-    }    
+      this.setState(JSON.parse(window.localStorage.getItem("sorterSettings") ?? "{}"), () => {
+        this.setState({
+          current: random.slice(0, this.state.count),
+        });  
+      });
+    }
   }
 
   settingsUpdated() {    
@@ -177,7 +177,7 @@ export default class extends React.Component {
                 type="button"
                 className="btn btn-light"
                 disabled={this.state.isSorting}
-                onClick={() => {
+                onClick={() => {                  
                   random = [...Array(200)].map(() => {
                     return {
                       value: Math.ceil(Math.random() * (max - min) + min),
