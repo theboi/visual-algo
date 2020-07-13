@@ -5,11 +5,10 @@ import style from "../style.module.css";
 export default (props: {
   title: string;
   options: string[];
+  value: number;
   onChange: (value) => void;
   disabled?: boolean;
 }) => {
-  const [selected, setSelected] = useState(0);
-
   return (
     <>
       <div className={style.main}>
@@ -18,7 +17,9 @@ export default (props: {
         </label>
         <div id="dropdown">
           <button
-            className={`btn dropdown-toggle btn-${props.disabled ?? false ? "secondary" : "outline-primary"}`}
+            className={`btn dropdown-toggle btn-${
+              props.disabled ?? false ? "secondary" : "outline-primary"
+            }`}
             type="button"
             id="dropdown"
             data-toggle="dropdown"
@@ -26,7 +27,7 @@ export default (props: {
             aria-expanded="false"
             disabled={props.disabled ?? false}
           >
-            {props.options[selected]}
+            {props.options[props.value]}
           </button>
           <div className="dropdown-menu" aria-labelledby="dropdown">
             {props.options.map((value, index) => (
@@ -35,8 +36,7 @@ export default (props: {
                 type="button"
                 key={index}
                 onClick={() => {
-                  setSelected(index)
-                  props.onChange(index)
+                  props.onChange(index);
                 }}
               >
                 {value}

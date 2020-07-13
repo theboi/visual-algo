@@ -18,6 +18,7 @@ let random = [...Array(200)].map(() => {
     status: 0,
   };
 });
+let fetchedLocalStorage = false;
 
 export default class extends React.Component {
   state = {
@@ -30,7 +31,7 @@ export default class extends React.Component {
     color: 0,
 
     timer: -1,
-    test: [false]
+    test: [false],
   };
 
   constructor(props) {
@@ -42,15 +43,29 @@ export default class extends React.Component {
     this.setState({
       current: random.slice(0, this.state.count),
     });
+    if (!fetchedLocalStorage) {
+      this.setState(JSON.parse(window.localStorage.getItem("sorterSettings") ?? "{}"));
+      fetchedLocalStorage = true;
+      console.log(JSON.parse(window.localStorage.getItem("sorterSettings") ?? "{}"))
+    }    
   }
 
-  render() {
+  settingsUpdated() {    
+    window.localStorage.setItem("sorterSettings", JSON.stringify({
+      speed: this.state.speed,
+      count: this.state.count,
+      algorithm: this.state.algorithm,
+      color: this.state.color,
+    }));
+  }
+
+  render() {    
     const algos = [bubbleSort, quickSort, mergeSort];
     return (
       <>
-      <Head>
-        <link rel="icon" href="./icon-sorter.png"/>
-      </Head>
+        <Head>
+          <link rel="icon" href="./icon-sorter.png" />
+        </Head>
         <div className={style.main}>
           <div className={style.diagram}>
             {this.state?.current.map((value, index) => {
@@ -89,7 +104,7 @@ export default class extends React.Component {
               value={this.state.speed}
               min={1}
               max={100}
-              onChange={(value) => this.setState({ speed: value })}
+              onChange={(value) => this.setState({ speed: value }, this.settingsUpdated)}
               disabled={this.state.isSorting}
             />
             <Slider
@@ -101,7 +116,7 @@ export default class extends React.Component {
                 this.setState({
                   count: value,
                   current: random.slice(0, value),
-                })
+                }, this.settingsUpdated)
               }
               disabled={this.state.isSorting}
             />
@@ -115,13 +130,15 @@ export default class extends React.Component {
                 // "Insertion Sort",
                 // "Tim Sort",
               ]}
-              onChange={(value) => this.setState({ algorithm: value })}
+              value={this.state.algorithm}
+              onChange={(value) => this.setState({ algorithm: value }, this.settingsUpdated)}
               disabled={this.state.isSorting}
             />
             <Dropdown
               title="Color"
               options={["Default", "Gradient"]}
-              onChange={(value) => this.setState({ color: value })}
+              value={this.state.color}
+              onChange={(value) => this.setState({ color: value }, this.settingsUpdated)}
               disabled={this.state.isSorting}
             />
             <div className={style.control}>
@@ -138,7 +155,7 @@ export default class extends React.Component {
                       const [result, timer] = await algos[this.state.algorithm](
                         this.state.current,
                         101 - this.state.speed,
-                        this.setState,
+                        this.setState
                       );
                       this.setState({ timer: timer });
 
@@ -185,8 +202,20 @@ export default class extends React.Component {
               )}
             </div>
             <div className={style.credits}>
-            <p>Made with ❤️ by <a href="https://www.ryanthe.com" target="_blank">Ryan The</a>, 2020</p>
-            <p>Open sourced on <a href="https://github.com/theboi/visual-algo" target="_blank">GitHub</a>. </p>
+              <p>
+                Made with ❤️ by{" "}
+                <a href="https://www.ryanthe.com" target="_blank">
+                  Ryan The
+                </a>
+                , 2020
+              </p>
+              <p>
+                Open sourced on{" "}
+                <a href="https://github.com/theboi/visual-algo" target="_blank">
+                  GitHub
+                </a>
+                .{" "}
+              </p>
             </div>
           </div>
         </div>

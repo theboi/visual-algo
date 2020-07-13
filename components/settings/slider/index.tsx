@@ -10,21 +10,22 @@ export default (props: {
   max: number;
   disabled?: boolean
 }) => {
-  const [value, setValue] = useState(props.value);
+  // const [value, setValue] = useState(props.value);
 
   const onChange = {
     onChange: (event) => {
-      setValue(event.target.valueAsNumber);
       props.onChange(event.target.valueAsNumber);
     },
     onBlur: (event) => {
+      if (Number.isNaN(event.target.valueAsNumber)) {
+        event.target.value = props.min
+      }
       let validated = Math.round(event.target.valueAsNumber)
       if (validated > props.max) {
         validated = props.max;
       } else if (validated < props.min) {
         validated = props.min;
       }
-      setValue(validated);
       props.onChange(validated);
     },
   }
@@ -39,7 +40,7 @@ export default (props: {
           type="range"
           className="custom-range"
           id="slider"
-          value={value}
+          value={props.value}
           min={props.min}
           max={props.max}
           disabled={props.disabled ?? false}
@@ -49,7 +50,7 @@ export default (props: {
           type="number"
           className="form-control col-2 pr-1"
           id="slider"
-          value={value}
+          value={props.value}
           disabled={props.disabled ?? false}
           {...onChange}
         />

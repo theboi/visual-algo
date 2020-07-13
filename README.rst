@@ -43,7 +43,7 @@ Sorting
 License
 -------
 
-This repository is licensed under the GNU General Public License v3.0
+This repository is licensed under the GNU General Public License v3.0. Feel free to open any pull requests, or fork this project openly.
 
 .. _a project: https://github.com/clementmihailescu/Sorting-Visualizer
 .. _Clément Mihailescu: https://github.com/clementmihailescu
