@@ -8,13 +8,14 @@ export async function quickSort(
   }[],
   speed: number,
   setState: (state) => void,
+
   isStart: boolean = true,
 
   high: number = input.length - 1,
-  low: number = 0,
+  low: number = 0
 ) {
   if (low >= high) return;
-  counter = isStart ? 0 : counter
+  counter = isStart ? 0 : counter;
 
   const pivot = input[Math.floor((high + low) / 2)]?.value;
   const pi = await partition(input, speed, setState, low, high, pivot);

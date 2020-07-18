@@ -1,0 +1,56 @@
+/* /////////////////////////////////////////////////////////////////////////////
+MOBILE
+//////////////////////////////////////////////////////////////////////////////*/
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.diagram {
+  display: flex;
+  margin: 0 auto 50px auto;
+  width: 80%;
+}
+
+.settings {
+  width: 100%;
+  background-color: var(--bg0);
+  padding: 30px;
+  border: var(--border) solid 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings > * {
+  margin-bottom: 10px;
+}
+
+.credits {
+  text-align: center;
+  margin-bottom: 20px 0;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: auto;
+}
+
+/* /////////////////////////////////////////////////////////////////////////////
+DESKTOP
+//////////////////////////////////////////////////////////////////////////////*/
+@media screen and (min-width: 768px) {
+  .main {
+    flex-direction: row;
+  }
+
+  .diagram {
+    margin: 0 30px;
+  }
+
+  .settings {
+    width: 400px;
+    min-width: 400px;
+    height: calc(100vh - 80px);
+    padding: 60px 40px;
+  }
+}
