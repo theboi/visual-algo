@@ -8,7 +8,6 @@
   padding: 0 35px;
   background-color: var(--l-darkblue);
   width: 100vw;
-  line-height: 80px;
 }
 
 .navbar > * {
@@ -19,6 +18,11 @@
 
 .navbar > p {
   cursor: default;
+  line-height: 80px;
+}
+
+.navbar > a {
+  line-height: 80px;
 }
 
 .navbar > a:hover {
@@ -28,4 +32,18 @@
 
 .brand {
   font-weight: 600;
+}
+
+.algosDropdown {
+  background-color: transparent;
+  color: var(--white);
+  border: none !important;
+  outline: none !important;
+  font-weight: 600;
+  padding: 0;
+}
+
+.algosDropdown {
+  color: var(--white);
+  filter: brightness(90%);
 }

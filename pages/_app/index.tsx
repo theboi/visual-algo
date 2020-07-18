@@ -2,11 +2,14 @@ import React from "react";
 import { AppProps } from "next/app";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import style from "./style.module.css";
 import "./global.css";
 
 export default ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -39,9 +42,24 @@ export default ({ Component, pageProps }: AppProps) => {
             <a className={style.brand}>Algorithm Visualiser</a>
           </Link>
           <p>|</p>
-          <Link href="/sorter">
-            <a className={style.brand}>Sorter</a>
-          </Link>
+          <div className="btn-group">
+            <button
+              type="button"
+              className={style.algosDropdown}
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {`${router.pathname[1].toUpperCase()}${router.pathname.slice(2)}`}
+            </button>
+            <div className="dropdown-menu">
+              {["Sorter", "Pathfinder"].map((value, index) => (
+                <Link href={`/${value.toLowerCase()}`} key={index}>
+                  <a className="dropdown-item">{value}</a>
+                </Link>
+              ))}
+            </div>
+          </div>
         </nav>
         <Component {...pageProps} />
       </div>
