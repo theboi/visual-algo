@@ -50,10 +50,10 @@ export default ({ Component, pageProps }: AppProps) => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {`${router.pathname[1].toUpperCase()}${router.pathname.slice(2)}`}
+              {`${router.pathname?.[1]?.toUpperCase() ?? "Algorithms"}${router.pathname.slice(2) ?? ""}`}
             </button>
             <div className="dropdown-menu">
-              {["Sorter", "Pathfinder"].map((value, index) => (
+              {["Sorter", "Search"].map((value, index) => (
                 <Link href={`/${value.toLowerCase()}`} key={index}>
                   <a className="dropdown-item">{value}</a>
                 </Link>

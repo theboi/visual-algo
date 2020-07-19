@@ -1,37 +1,29 @@
-import { delay, swap } from "./utility";
+import { swap, SortData, SortUtilities } from "./utility";
 
 let counter: number;
 export async function quickSort(
-  input: {
-    value: number;
-    status: number;
-  }[],
-  speed: number,
-  setState: (state) => void,
+  arr: SortData[],
+  utils: SortUtilities,
 
   isStart: boolean = true,
 
-  high: number = input.length - 1,
+  high: number = arr.length - 1,
   low: number = 0
 ) {
   if (low >= high) return;
   counter = isStart ? 0 : counter;
 
-  const pivot = input[Math.floor((high + low) / 2)]?.value;
-  const pi = await partition(input, speed, setState, low, high, pivot);
-  await quickSort(input, speed, setState, false, pi - 1, low);
-  await quickSort(input, speed, setState, false, high, pi);
+  const pivot = arr[Math.floor((high + low) / 2)]?.value;
+  const pi = await partition(arr, utils, low, high, pivot);
+  await quickSort(arr, utils, false, pi - 1, low);
+  await quickSort(arr, utils, false, high, pi);
 
-  return [input, counter];
+  return [arr, counter];
 }
 
 const partition = async (
-  arr: {
-    value: number;
-    status: number;
-  }[],
-  speed: number,
-  setState: (state) => void,
+  arr: SortData[],
+  utils: SortUtilities,
   // counter: number,
 
   low: number,
@@ -46,9 +38,8 @@ const partition = async (
       high--;
     }
     if (low <= high) {
-      await swap(arr, low, high, speed, setState);
+      await swap(arr, utils, low, high);
       counter++;
-
       low++;
       high--;
     }

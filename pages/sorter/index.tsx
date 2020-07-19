@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import style from "./style.module.css";
 
@@ -179,11 +179,10 @@ export default class extends React.Component {
                         (async () => {
                           const [result, timer] = await algos[
                             this.state.algorithm
-                          ](
-                            this.state.current,
-                            101 - this.state.speed,
-                            this.setState
-                          );
+                          ](this.state.current, {
+                            speed: 101 - this.state.speed,
+                            setState: this.setState,
+                          });
                           this.setState({ timer: timer });
 
                           completeAnimation(

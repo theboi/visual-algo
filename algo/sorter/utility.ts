@@ -1,3 +1,13 @@
+export interface SortUtilities {
+  speed: number;
+  setState: (state) => void;
+}
+
+export interface SortData {
+  value: number;
+  status: number;
+}
+
 export const completeAnimation = (
   arr: { value: number; status: number }[],
   setState: (state) => void
@@ -24,19 +34,16 @@ export const delay = (duration: number, callback: Function) => {
 };
 
 export const swap = async (
-  arr: {
-    value: number;
-    status: number;
-  }[],
+  arr: SortData[],
+  utils: SortUtilities,
+  
   index1: number,
   index2: number,
-  speed: number,
-  setState: (state) => void
 ) => {
   [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
   arr[index1].status = 1;
   arr[index2].status = 2;
-  await delay(speed, () => setState({ current: arr }));
+  await delay(utils.speed, () => utils.setState({ current: arr }));
   arr[index1].status = 0;
   arr[index2].status = 0;
 };
