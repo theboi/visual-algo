@@ -53,7 +53,7 @@ export default ({ Component, pageProps }: AppProps) => {
               {`${router.pathname?.[1]?.toUpperCase() ?? "Algorithms"}${router.pathname.slice(2) ?? ""}`}
             </button>
             <div className="dropdown-menu">
-              {["Sorter", "Search"].map((value, index) => (
+              {["Sorter", "Pathfinder", "Search"].map((value, index) => (
                 <Link href={`/${value.toLowerCase()}`} key={index}>
                   <a className="dropdown-item">{value}</a>
                 </Link>

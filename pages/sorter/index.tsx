@@ -81,6 +81,7 @@ export default class extends React.Component {
           <Page
             diagram={
               <>
+              <div className={style.diagram}>
                 {this.state?.current.map((value, index) => {
                   const status = value.status
                     ? {
@@ -113,6 +114,7 @@ export default class extends React.Component {
                     </div>
                   );
                 })}
+                </div>
               </>
             }
             settings={
@@ -149,9 +151,10 @@ export default class extends React.Component {
                     "Bubble Sort",
                     "Quick Sort",
                     "Merge Sort",
-                    // "Heap Sort",
+                    "Heap Sort",
                     // "Insertion Sort",
                     // "Tim Sort",
+                    // "Bogo Sort",
                   ]}
                   value={this.state.algorithm}
                   onChange={(value) =>

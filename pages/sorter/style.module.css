@@ -1,6 +1,13 @@
 /* /////////////////////////////////////////////////////////////////////////////
 MOBILE
 //////////////////////////////////////////////////////////////////////////////*/
+.diagram {
+  display: flex;
+  margin: 0 auto 50px auto;
+  width: 80%;
+  justify-content: center;
+}
+
 .bar {
   position: relative;
   width: 0.01px;
@@ -44,5 +51,9 @@ DESKTOP
 @media screen and (min-width: 768px) {
   .control {
     margin-top: 50px;
+  }
+
+  .diagram {
+    margin: 0 auto;
   }
 }

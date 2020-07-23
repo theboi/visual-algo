@@ -13,7 +13,11 @@ export default class Name extends React.Component {
       <>
         <div className={style.main}>
           <Page
-            diagram={<></>}
+            diagram={
+              <>
+                <div style={{ width: "100%", backgroundColor: "red"}}></div>
+              </>
+            }
             settings={
               <>
                 <Slider
