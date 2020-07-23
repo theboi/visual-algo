@@ -24,7 +24,6 @@ export async function quickSort(
 const partition = async (
   arr: SortData[],
   utils: SortUtilities,
-  // counter: number,
 
   low: number,
   high: number,
@@ -40,6 +39,7 @@ const partition = async (
     if (low <= high) {
       await swap(arr, utils, low, high);
       counter++;
+      
       low++;
       high--;
     }

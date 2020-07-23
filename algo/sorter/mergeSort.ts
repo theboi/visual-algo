@@ -1,4 +1,4 @@
-import { swap, SortUtilities, SortData } from "./utility";
+import { delay, copyArray, SortUtilities, SortData } from "./utility";
 
 let counter: number;
 export async function mergeSort(
@@ -6,30 +6,50 @@ export async function mergeSort(
   utils: SortUtilities,
   isStart: boolean = true,
 
-  rightEnd: number = arr.length - 1,
   leftStart: number = 0,
-  tempArr: SortData[] = []
+  rightEnd: number = arr.length - 1,
+  temp: SortData[] = new Array<SortData>(arr.length)
 ) {
   if (leftStart >= rightEnd) return;
   counter = isStart ? 0 : counter;
 
   const mid = Math.floor((rightEnd + leftStart) / 2);
-  mergeSort(arr, utils, false, mid, leftStart, tempArr);
-  mergeSort(arr, utils, false, rightEnd, mid + 1, tempArr);
-  // merge();
+  await mergeSort(arr, utils, false, leftStart, mid, temp);
+  await mergeSort(arr, utils, false, mid + 1, rightEnd, temp);
+  await mergeHalves(arr, utils, leftStart, rightEnd, temp);
 
   return [arr, counter];
 }
 
-const merge = async (
-  arr: {
-    value: number;
-    status: number;
-  }[],
-  speed: number,
-  setState: (state) => void,
-  tempArr: {
-    value: number;
-    status: number;
-  }[] = []
-) => {};
+const mergeHalves = async (
+  arr: SortData[],
+  utils: SortUtilities,
+  leftStart: number,
+  rightEnd: number,
+  temp: SortData[]
+) => {
+  let leftEnd = Math.floor((leftStart + rightEnd) / 2);
+  let rightStart = leftEnd + 1;
+  const size = rightEnd - leftStart + 1;
+
+  let left = leftStart;
+  let right = rightStart;
+  let index = leftStart;
+
+  while (left <= leftEnd && right <= rightEnd) {
+    if (arr[left].value <= arr[right].value) {
+      temp[index] = arr[left];
+      left++;
+    } else {
+      temp[index] = arr[right];
+      right++;
+    }
+    index++;
+  }
+
+  await copyArray(utils, arr, left, temp, index, leftEnd - left + 1);
+  await copyArray(utils, arr, right, temp, index, rightEnd - right + 1);
+  await copyArray(utils, temp, leftStart, arr, leftStart, size);
+  await delay(utils.speed, () => utils.setState({ current: arr }));
+
+};
