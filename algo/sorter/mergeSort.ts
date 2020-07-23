@@ -44,6 +44,7 @@ const mergeHalves = async (
       temp[index] = arr[right];
       right++;
     }
+    counter++;
     index++;
   }
 
@@ -51,5 +52,4 @@ const mergeHalves = async (
   await copyArray(utils, arr, right, temp, index, rightEnd - right + 1);
   await copyArray(utils, temp, leftStart, arr, leftStart, size);
   await delay(utils.speed, () => utils.setState({ current: arr }));
-
 };

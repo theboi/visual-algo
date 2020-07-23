@@ -222,7 +222,7 @@ export default class extends React.Component {
                 <div>
                   {this.state.timer === -1 ? null : (
                     <p className={style.speed}>
-                      {this.state.timer} swap
+                      {this.state.timer} comparison
                       {this.state.timer === 1 ? null : "s"} (approx{" "}
                       {this.state.timer * (101 - this.state.speed)} ms)
                     </p>
