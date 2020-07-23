@@ -31,8 +31,10 @@ export default class extends React.Component {
     algorithm: 0,
     color: 0,
 
-    timer: -1,
-    test: [false],
+    timer: {
+      swaps: -1,
+      compares: -1,
+    },
   };
 
   fetchedLocalStorage = false;
@@ -212,7 +214,10 @@ export default class extends React.Component {
                       });
                       this.setState({
                         current: random.slice(0, this.state.count),
-                        timer: -1,
+                        timer: {
+                          swaps: -1,
+                          compares: -1,
+                        },
                       });
                     }}
                   >
@@ -220,11 +225,14 @@ export default class extends React.Component {
                   </button>
                 </div>
                 <div>
-                  {this.state.timer === -1 ? null : (
+                  {this.state.timer.compares === -1 ? null : (
                     <p className={style.speed}>
-                      {this.state.timer} comparison
-                      {this.state.timer === 1 ? null : "s"} (approx{" "}
-                      {this.state.timer * (101 - this.state.speed)} ms)
+                      {this.state.timer.compares} comparison
+                      {this.state.timer.compares === 1 ? null : "s"} <br/>
+                      {this.state.timer.swaps} swap
+                      {this.state.timer.swaps === 1 ? null : "s"}
+                      {/* (approx{" "}
+                      {this.state.timer.compares * (101 - this.state.speed)} ms) */}
                     </p>
                   )}
                 </div>

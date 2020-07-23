@@ -1,6 +1,6 @@
-import { delay, copyArray, SortUtilities, SortData } from "./utility";
+import { delay, copyArray, SortUtilities, SortData, SortCounter } from "./utility";
 
-let counter: number;
+let counter: SortCounter;
 export async function mergeSort(
   arr: SortData[],
   utils: SortUtilities,
@@ -11,7 +11,10 @@ export async function mergeSort(
   temp: SortData[] = new Array<SortData>(arr.length)
 ) {
   if (leftStart >= rightEnd) return;
-  counter = isStart ? 0 : counter;
+  counter = isStart ? {
+    swaps: 0,
+    compares: 0,
+  } : counter;
 
   const mid = Math.floor((rightEnd + leftStart) / 2);
   await mergeSort(arr, utils, false, leftStart, mid, temp);
@@ -44,7 +47,8 @@ const mergeHalves = async (
       temp[index] = arr[right];
       right++;
     }
-    counter++;
+    counter.compares++;
+    counter.swaps++;
     index++;
   }
 

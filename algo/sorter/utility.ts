@@ -8,6 +8,11 @@ export interface SortData {
   status: number;
 }
 
+export interface SortCounter {
+  swaps: number;
+  compares: number;
+}
+
 export const completeAnimation = (
   arr: { value: number; status: number }[],
   setState: (state) => void
