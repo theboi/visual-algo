@@ -5,7 +5,7 @@ import style from "./style.module.css";
 import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
 
-import Page from "../../components/pages";
+import Page from "../../components/pages/page";
 
 export default class Name extends React.Component {
   render() {

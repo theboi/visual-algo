@@ -41,6 +41,10 @@ DESKTOP
     flex-direction: row;
   }
   
+  .diagram {
+    width: calc(100% - 400px);
+  }
+  
   .settings {
     width: 400px;
     min-width: 400px;

@@ -10,7 +10,7 @@ import { mergeSort } from "../../algo/sorter/mergeSort";
 import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
 
-import Page from "../../components/pages";
+import Page from "../../components/pages/page";
 
 const min = 1;
 const max = 500;

@@ -5,7 +5,7 @@ import style from "./style.module.css";
 import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
 
-import Page from "../../components/pages";
+import Page from "../../components/pages/page";
 
 export default class Name extends React.Component {
   render() {
@@ -15,7 +15,9 @@ export default class Name extends React.Component {
           <Page
             diagram={
               <>
-                <div style={{ width: "100%", backgroundColor: "red"}}></div>
+                <div className={style.diagram}>
+                  <div className={style.box}></div>
+                </div>
               </>
             }
             settings={
