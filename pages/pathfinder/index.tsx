@@ -8,6 +8,26 @@ import Dropdown from "../../components/settings/dropdown";
 import Page from "../../components/pages/page";
 
 export default class Name extends React.Component {
+  state = {
+    current: []
+  }
+
+  fetchedLocalStorage = false;
+
+  componentDidMount() {
+    if (!this.fetchedLocalStorage) {
+      this.fetchedLocalStorage = true;
+      this.setState(
+        JSON.parse(window.localStorage.getItem("sorterSettings") ?? "{}"),
+        () => {
+          // this.setState({
+          //   current: random.slice(0, this.state.count),
+          // });
+        }
+      );
+    }
+  }
+
   render() {
     return (
       <>
@@ -16,7 +36,7 @@ export default class Name extends React.Component {
             diagram={
               <>
                 <div className={style.diagram}>
-                  <div className={style.box}></div>
+                  {[...Array(100)]}
                 </div>
               </>
             }
