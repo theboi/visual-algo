@@ -12,11 +12,11 @@ import Dropdown from "../../components/settings/dropdown";
 
 import Page from "../../components/pages/page";
 
-const min = 1;
-const max = 500;
+const MIN = 1;
+const MAX = 500;
 let random = [...Array(200)].map(() => {
   return {
-    value: Math.ceil(Math.random() * (max - min) + min),
+    value: Math.ceil(Math.random() * (MAX - MIN) + MIN),
     status: 0,
   };
 });
@@ -98,11 +98,11 @@ export default class extends React.Component {
                         height: value.value,
                         backgroundColor: [
                           "#007bff",
-                          `rgb(${255 * ((value.value - min) / (max - min))}, ${
-                            255 - 255 * ((value.value - min) / (max - min))
+                          `rgb(${255 * ((value.value - MIN) / (MAX - MIN))}, ${
+                            255 - 255 * ((value.value - MIN) / (MAX - MIN))
                           }, ${
                             255 -
-                            (255 * ((value.value - min) / (max - min))) / 2
+                            (255 * ((value.value - MIN) / (MAX - MIN))) / 2
                           })`,
                         ][this.state.color],
                         ...status,
@@ -211,7 +211,7 @@ export default class extends React.Component {
                     onClick={() => {
                       random = [...Array(200)].map(() => {
                         return {
-                          value: Math.ceil(Math.random() * (max - min) + min),
+                          value: Math.ceil(Math.random() * (MAX - MIN) + MIN),
                           status: 0,
                         };
                       });

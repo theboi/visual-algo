@@ -11,7 +11,7 @@ export default (props: { diagram: ReactNode; settings: ReactNode }) => {
           {props.settings}
           <div className={style.credits}>
             <p>
-              Made with ❤️ by{" "}
+              Made with ♥ by{" "}
               <a href="https://www.ryanthe.com" target="_blank">
                 Ryan The
               </a>
