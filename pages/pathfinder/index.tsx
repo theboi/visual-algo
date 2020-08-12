@@ -7,8 +7,8 @@ import Dropdown from "../../components/settings/dropdown";
 
 import Page from "../../components/pages/page";
 
-const COLUMNS = 100;
-const ROWS = 100;
+const COLUMNS = 30;
+const ROWS = 30;
 const START_NODE = {
   ROW: 10,
   COL: 10,
@@ -20,18 +20,16 @@ const FINISH_NODE = {
 
 export default class extends React.Component {
   state = {
-    current: [
-      ...Array(ROWS).map((row) => [
-        ...Array(COLUMNS).map((col) => ({
-          row,
-          col,
-          isStart: row === START_NODE.ROW && col === START_NODE.COL,
-          isFinish: row === FINISH_NODE.ROW && col === FINISH_NODE.COL,
-          isVisited: false,
-          isWall: false,
-        })),
-      ]),
-    ],
+    current: [...Array(ROWS)].map((row) =>
+      [...Array(COLUMNS)].map((col) => ({
+        row,
+        col,
+        isStart: row === START_NODE.ROW && col === START_NODE.COL,
+        isFinish: row === FINISH_NODE.ROW && col === FINISH_NODE.COL,
+        isVisited: false,
+        isWall: false,
+      }))
+    ),
     isPathfinding: false,
 
     algorithm: 0,
@@ -61,15 +59,31 @@ export default class extends React.Component {
   }
 
   render() {
-    console.log([...Array(10)].fill([...Array(10)]))
-
     return (
       <>
         <div className={style.main}>
           <Page
             diagram={
               <>
-                <div className={style.diagram}>{[...Array(10)].fill([...Array(10)])}</div>
+                <div className={style.diagram}>
+                  <div
+                    className={style.grid}
+                    style={{
+                      gridTemplateRows: `repeat(${ROWS}, 30px)`,
+                      gridTemplateColumns: `repeat(${COLUMNS}, 30px)`,
+                    }}
+                  >
+                    {this.state.current.map((value, index) =>
+                      value.map((value, index) => (
+                        <div
+                          className={style.gridBox}
+                          key={index}
+                          style={{ backgroundColor: "white" }}
+                        ></div>
+                      ))
+                    )}
+                  </div>
+                </div>
               </>
             }
             settings={
