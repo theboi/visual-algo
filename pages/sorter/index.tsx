@@ -75,45 +75,47 @@ export default class extends React.Component {
     return (
       <>
         <Head>
-          <link rel="icon" href="./icon-sorter.png" />
+          <link rel="icon" href="./icons/sorter-icon.png" />
         </Head>
         <div className={style.main}>
           <Page
             diagram={
               <>
-              <div className={style.diagram}>
-                {this.state?.current.map((value, index) => {
-                  const status = value.status
-                    ? {
-                        backgroundColor: [null, "#ffc107", "#28a745"][
-                          value.status
-                        ],
-                      }
-                    : null;
-                  return (
-                    <div
-                      className={style.bar}
-                      key={index}
-                      style={{
-                        height: value.value,
-                        backgroundColor: [
-                          "#007bff",
-                          `rgb(${255 * ((value.value - MIN) / (MAX - MIN))}, ${
-                            255 - 255 * ((value.value - MIN) / (MAX - MIN))
-                          }, ${
-                            255 -
-                            (255 * ((value.value - MIN) / (MAX - MIN))) / 2
-                          })`,
-                        ][this.state.color],
-                        ...status,
-                      }}
-                    >
-                      {this.state.count < 70 ? (
-                        <p className={style.barLabel}>{value.value}</p>
-                      ) : null}
-                    </div>
-                  );
-                })}
+                <div className={style.diagram}>
+                  {this.state?.current.map((value, index) => {
+                    const status = value.status
+                      ? {
+                          backgroundColor: [null, "#ffc107", "#28a745"][
+                            value.status
+                          ],
+                        }
+                      : null;
+                    return (
+                      <div
+                        className={style.bar}
+                        key={index}
+                        style={{
+                          height: value.value,
+                          backgroundColor: [
+                            "#007bff",
+                            `rgb(${
+                              255 * ((value.value - MIN) / (MAX - MIN))
+                            }, ${
+                              255 - 255 * ((value.value - MIN) / (MAX - MIN))
+                            }, ${
+                              255 -
+                              (255 * ((value.value - MIN) / (MAX - MIN))) / 2
+                            })`,
+                          ][this.state.color],
+                          ...status,
+                        }}
+                      >
+                        {this.state.count < 70 ? (
+                          <p className={style.barLabel}>{value.value}</p>
+                        ) : null}
+                      </div>
+                    );
+                  })}
                 </div>
               </>
             }
@@ -231,7 +233,7 @@ export default class extends React.Component {
                   {this.state.timer.compares === -1 ? null : (
                     <p className={style.speed}>
                       {this.state.timer.compares} comparison
-                      {this.state.timer.compares === 1 ? null : "s"} <br/>
+                      {this.state.timer.compares === 1 ? null : "s"} <br />
                       {this.state.timer.swaps} swap
                       {this.state.timer.swaps === 1 ? null : "s"}
                       {/* (approx{" "}

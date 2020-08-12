@@ -6,6 +6,7 @@ import Slider from "../../components/settings/slider";
 import Dropdown from "../../components/settings/dropdown";
 
 import Page from "../../components/pages/page";
+import Head from "next/head";
 
 const COLUMNS = 30;
 const ROWS = 30;
@@ -61,6 +62,9 @@ export default class extends React.Component {
   render() {
     return (
       <>
+        <Head>
+          <link rel="icon" href="./icons/pathfinder-icon.png" />
+        </Head>
         <div className={style.main}>
           <Page
             diagram={
